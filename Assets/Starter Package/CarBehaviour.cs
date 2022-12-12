@@ -25,6 +25,13 @@ public class CarBehaviour : MonoBehaviour
     public ReticleBehaviour Reticle;
     public float Speed = 1.2f;
 
+    private PresentsCount _presentCount;
+
+    void Start()
+    {
+        _presentCount = Object.FindObjectOfType<PresentsCount>();
+    }
+
     private void Update()
     {
         var trackingPosition = Reticle.transform.position;
@@ -45,6 +52,7 @@ public class CarBehaviour : MonoBehaviour
         var Package = other.GetComponent<PackageBehaviour>();
         if (Package != null)
         {
+            _presentCount.AddPoint();
             Destroy(other.gameObject);
         }
     }
